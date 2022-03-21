@@ -1,4 +1,5 @@
 import { v4 } from "uuid";
+import { farmMemStore } from "./farm-mem-store.js";
 
 let placemarks = [];
 
@@ -14,7 +15,13 @@ export const placemarkMemStore = {
   },
 
   async getPlacemarkById(id) {
-    return placemarks.find((placemark) => placemark._id === id);
+    const list = placemarks.find((placemark) => placemark._id === id);
+    list.farms = await farmMemStore.getFarmsByPlacemarkId(list._id);
+    return list;
+  },
+
+  async getUserPlacemarks(userid) {
+    return placemarks.filter((placemark) => placemark.userid === userid);
   },
 
   async deletePlacemarkById(id) {

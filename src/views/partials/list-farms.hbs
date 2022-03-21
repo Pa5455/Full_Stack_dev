@@ -1,0 +1,24 @@
+<table class="table is-fullwidth">
+  <thead>
+    <tr>
+      <th>FarmerName</th>
+      <th>Address</th>
+      <th>Enterprise</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each placemark.farms}}
+      <tr>
+        <td>
+          {{farmername}}
+        </td>
+        <td>
+          {{address}}
+        </td>
+        <td>
+          {{enterprise}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
