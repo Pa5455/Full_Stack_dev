@@ -1,7 +1,6 @@
-// import { userMemStore } from "./mem/user-mem-store.js";
-// import { placemarkMemStore } from "./mem/placemark-mem-store.js";
-// import { farmMemStore } from "./mem/farm-mem-store.js";
-
+import { userMemStore } from "./mem/user-mem-store.js";
+import { placemarkMemStore } from "./mem/placemark-mem-store.js";
+import { farmMemStore } from "./mem/farm-mem-store.js";
 import { userJsonStore } from "./json/user-json-store.js";
 import { placemarkJsonStore } from "./json/placemark-json-store.js";
 import { farmJsonStore } from "./json/farm-json-store.js";
@@ -11,9 +10,17 @@ export const db = {
   placemarkStore: null,
   farmStore: null,
 
-  init() {
+  init(storeType) {
+    switch (storeType) {
+      case "json":
     this.userStore = userJsonStore;
     this.placemarkStore = placemarkJsonStore;
     this.farmStore = farmJsonStore;
+    break;
+      default:
+    this.userStore = userMemStore;
+    this.placemarkStore = placemarkMemStore;
+    this.farmStore = farmMemStore;
+    }
   },
 };
