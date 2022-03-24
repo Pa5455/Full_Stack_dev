@@ -25,3 +25,47 @@ export const maggie = {
       password: "secret",
     },
   ];
+
+  export const curranFarms = {
+    title: "Curran Farms "
+  };
+
+  export const taylorFarms = {
+    "farmername": "Gary Taylor",
+    "address": "V92 A6R7",
+    "enterprise": "dairy"
+  };
+  
+  export const katieFarms = {
+    title: "Katie Farms"
+  };
+  
+  export const testPlacemarks = [
+    {
+      title: "Smith Farms "
+    },
+    {
+      title: "Murphy Farms"
+    },
+    {
+      title: "McDonald Farms"
+    }
+  ];
+
+  export const testFarms = [
+    {
+      "farmername": "John Smith",
+      "address": "V92 A845",
+      "enterprise": "dairy",
+    },
+    {
+      "farmername": "John Murphy",
+      "address": "X42 A645",
+      "enterprise": "tillage",
+    },
+    {
+      "farmername": "Old McDonald",
+      "address": "A43 X2A4",
+      "enterprise": "sheep",
+    },
+  ];
