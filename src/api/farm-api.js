@@ -5,7 +5,9 @@ import { validationError } from "./logger.js";
 
 export const farmApi = {
   find: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         const farms = await db.farmStore.getAllFarms();
@@ -16,8 +18,8 @@ export const farmApi = {
     },
     tags: ["api"],
     response: { schema: FarmArraySpec, failAction: validationError },
-    description: "Get all farmApi",
-    notes: "Returns all farmApi",
+    description: "Get all farms",
+    notes: "Returns all farms",
   },
 
   findOne: {
@@ -41,7 +43,9 @@ export const farmApi = {
   },
 
   create: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         const farm = await db.farmStore.addFarm(request.params.id, request.payload);
@@ -61,7 +65,9 @@ export const farmApi = {
   },
 
   deleteAll: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         await db.farmStore.deleteAllFarms();
@@ -75,7 +81,9 @@ export const farmApi = {
   },
 
   deleteOne: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         const farm = await db.farmStore.getFarmById(request.params.id);

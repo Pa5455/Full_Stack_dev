@@ -1,20 +1,20 @@
 import { assert } from "chai";
 import { db } from "../../src/models/db.js";
-import { testPlacemarks, testFarms, katieFarms, curranFarms, taylorFarms, testUsers } from "../fixtures.js";
+import { testPlacemarks, testFarms, beethoven, curranFarms, taylorFarms, testUsers } from "../fixtures.js";
 import { assertSubset } from "../test-utils.js";
 
 suite("Farm Model tests", () => {
 
-  let katieFarmsList = null;
+  let beethovenList = null;
 
   setup(async () => {
     db.init("mongo");
     await db.placemarkStore.deleteAllPlacemarks();
     await db.farmStore.deleteAllFarms();
-    katieFarmsList = await db.placemarkStore.addPlacemark(katieFarms);
+    beethovenList = await db.placemarkStore.addPlacemark(beethoven);
     for (let i = 0; i < testFarms.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      testFarms[i] = await db.farmStore.addFarm(katieFarmsList._id, testFarms[i]);
+      testFarms[i] = await db.farmStore.addFarm(beethovenList._id, testFarms[i]);
     }
   });
 
@@ -26,7 +26,7 @@ suite("Farm Model tests", () => {
   });
 
   test("create multiple farmApi", async () => {
-    const farms = await db.placemarkStore.getPlacemarkById(katieFarmsList._id);
+    const farms = await db.placemarkStore.getPlacemarkById(beethovenList._id);
     assert.equal(testFarms.length, testFarms.length)
   });
 

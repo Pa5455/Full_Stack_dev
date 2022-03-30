@@ -25,7 +25,7 @@ export const FarmSpec = Joi.object()
   .keys({
     farmername: Joi.string().required().example("John Murphy"),
     address: Joi.string().required().example("Lixnaw Kerry"),
-    enterprise: Joi.string().example("tillage"),
+    enterprise: Joi.string().required().example("tillage"),
     placemarkid: IdSpec,
   })
   .label("Farm");

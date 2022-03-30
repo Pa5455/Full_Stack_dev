@@ -51,8 +51,13 @@ export const placemarkService = {
     return res.data;
   },
 
+  async getAllFarms() {
+    const res = await axios.get(`${this.placemarkUrl}/api/farms`);
+    return res.data;
+  },
+
   async createFarm(id, farm) {
-    const res = await axios.post(`${this.placemarkUrl}/api/playlists/${id}/farms`, farm);
+    const res = await axios.post(`${this.placemarkUrl}/api/placemarks/${id}/farms`, farm);
     return res.data;
   },
 

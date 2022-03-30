@@ -1,35 +1,36 @@
 import { assert } from "chai";
-import { placemarkService } from "./placemark-service.js";
 import { assertSubset } from "../test-utils.js";
-import { maggie, maggieCredentials, curranFarms, testFarms, taylorFarms } from "../fixtures.js";
+import { placemarkService } from "./placemark-service.js";
+import { maggie, maggieCredentials, curranFarms, testPlacemarks, testFarms, taylorFarms} from "../fixtures.js";
 
 suite("Farm API tests", () => {
   let user = null;
-  let smithFarms = null;
+  let beethovenSonatas = null;
 
   setup(async () => {
+    placemarkService.clearAuth();
+    user = await placemarkService.createUser(maggie);
+    await placemarkService.authenticate(maggieCredentials);
     await placemarkService.deleteAllPlacemarks();
-    await placemarkService.deleteAllUsers();
     await placemarkService.deleteAllFarms();
+    await placemarkService.deleteAllUsers();
     user = await placemarkService.createUser(maggie);
     await placemarkService.authenticate(maggieCredentials);
     curranFarms.userid = user._id;
-    smithFarms = await placemarkService.createPlacemark(curranFarms);
+    beethovenSonatas = await placemarkService.createPlacemark(curranFarms);
   });
 
   teardown(async () => {});
 
   test("create farm", async () => {
-    const returnedFarm = await placemarkService.createFarm(smithFarms._id, taylorFarms);
+    const returnedFarm = await placemarkService.createFarm(beethovenSonatas._id, taylorFarms);
     assertSubset(taylorFarms, returnedFarm);
   });
-
-  
 
   test("create Multiple farms", async () => {
     for (let i = 0; i < testFarms.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      await placemarkService.createFarm(smithFarms._id, testFarms[i]);
+      await placemarkService.createFarm(beethovenSonatas._id, testFarms[i]);
     }
     const returnedFarms = await placemarkService.getAllFarms();
     assert.equal(returnedFarms.length, testFarms.length);
@@ -43,7 +44,7 @@ suite("Farm API tests", () => {
   test("Delete FarmApi", async () => {
     for (let i = 0; i < testFarms.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      await placemarkService.createFarm(smithFarms._id, testFarms[i]);
+      await placemarkService.createFarm(beethovenSonatas._id, testFarms[i]);
     }
     let returnedFarms = await placemarkService.getAllFarms();
     assert.equal(returnedFarms.length, testFarms.length);
@@ -55,12 +56,12 @@ suite("Farm API tests", () => {
     assert.equal(returnedFarms.length, 0);
   });
 
-  test("denormalised placemark", async () => {
+  test("denormalised playlist", async () => {
     for (let i = 0; i < testFarms.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      await placemarkService.createFarm(smithFarms._id, testFarms[i]);
+      await placemarkService.createFarm(beethovenSonatas._id, testFarms[i]);
     }
-    const returnedPlacemark = await placemarkService.getPlacemark(smithFarms._id);
+    const returnedPlacemark = await placemarkService.getPlacemark(beethovenSonatas._id);
     assert.equal(returnedPlacemark.farms.length, testFarms.length);
     for (let i = 0; i < testFarms.length; i += 1) {
       assertSubset(testFarms[i], returnedPlacemark.farms[i]);
