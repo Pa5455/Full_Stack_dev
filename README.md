@@ -21,6 +21,9 @@ development, whcih is hwy I have not deviated much from the labs. I can see now 
 and pointed right at the problem quickly. Of course validating the code can run error free is another advantage to cover various senarios. 
 
 
-Link For You tube vide of project demo to go here.
+Link For You tube demo: https://youtu.be/k_4Bn9pDQUs
+Link For Heroku Deployed: https://quiet-retreat-18754.herokuapp.com
+
+
 
 
