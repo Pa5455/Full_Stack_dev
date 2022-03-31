@@ -21,6 +21,7 @@ export const webRoutes = [
   { method: "GET", path: "/dashboard/deleteplacemark/{id}", config: dashboardController.deletePlacemark },
   { method: "GET", path: "/placemark/{id}/deletefarm/{farmid}", config: placemarkController.deleteFarm },
 
-  { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } }
+  { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
+  { method: "POST", path: "/placemark/{id}/uploadimage", config: placemarkController.uploadImage },
 ];
 
