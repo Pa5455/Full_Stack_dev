@@ -5,7 +5,7 @@ export const IdSpec = Joi.alternatives().try(Joi.string(), Joi.object()).descrip
 export const UserCredentialsSpec = Joi.object()
   .keys({
     email: Joi.string().email().example("homer@simpson.com").required(),
-    password: Joi.string().example("secret").required(),
+    password: Joi.string().example("secret").required().regex(/^[A-Z][a-zA-Z'-]{8,}$/),
   })
   .label("UserCredentials");
 
@@ -40,6 +40,7 @@ export const FarmArraySpec = Joi.array().items(FarmSpecPlus).label("FarmArray");
 export const PlacemarkSpec = Joi.object()
   .keys({
     title: Joi.string().required().example("Murphy Farms"),
+    country: Joi.string().required().example("Ireland"),
     userid: IdSpec,
     farms: FarmArraySpec,
   })
