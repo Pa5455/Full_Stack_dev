@@ -23,5 +23,13 @@ export const webRoutes = [
 
   { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
   { method: "POST", path: "/placemark/{id}/uploadimage", config: placemarkController.uploadImage },
+  {
+    method: "GET",
+    path: "/welcome/{user}",
+    handler: function (request, reply) {
+        return `Welcome ${  request.params.user}`;
+    },
+    config: {auth: false}
+},
 ];
 

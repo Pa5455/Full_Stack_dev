@@ -5,7 +5,7 @@ export const dashboardController = {
   index: {
     handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
-      const placemarks = await db.placemarkStore.getUserPlacemarks(loggedInUser._id);
+      const placemarks = await db.placemarkStore.getAllPlacemarks(); // modified for step 3c of security
       const viewData = {
         title: "Placemarks Dashboard",
         user: loggedInUser,

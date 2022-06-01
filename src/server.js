@@ -9,11 +9,14 @@ import Handlebars from "handlebars";
 import Inert from "@hapi/inert";
 import HapiSwagger from "hapi-swagger";
 import jwt from "hapi-auth-jwt2";
+import fs from "fs";
 import { webRoutes } from "./web-routes.js";
 import { db } from "./models/db.js";
 import { accountsController } from "./controllers/accounts-controller.js";
 import { apiRoutes } from "./api-routes.js";
 import { validate } from "./api/jwt-utils.js";
+
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -41,7 +44,12 @@ const swaggerOptions = {
 
 async function init() {
   const server = Hapi.server({
-    port: process.env.PORT || 3000,
+    port: process.env.PORT || 3443,
+    tls: {
+      key: fs.readFileSync("keys/private/webserver2.key"),
+      cert: fs.readFileSync("keys/webserver2_self.crt")
+}
+
   });
 
   await server.register(Vision);
@@ -89,12 +97,16 @@ async function init() {
 
   server.auth.default("session");
 
+
+  
   db.init("mongo");
   server.route(webRoutes);
   server.route(apiRoutes);
   await server.start();
   console.log("Server running on %s", server.info.uri);
 }
+
+
 
 process.on("unhandledRejection", (err) => {
   console.log(err);
